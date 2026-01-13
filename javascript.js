@@ -329,3 +329,42 @@ function clearCart() {
     localStorage.removeItem('gg_cart');
     location.reload();
 }
+
+// --- 5. UPDATED PAYMENT & RECEIPT LOGIC ---
+if (payBtn) {
+    payBtn.addEventListener('click', () => {
+        const cart = JSON.parse(localStorage.getItem('gg_cart')) || [];
+        if (cart.length === 0) return alert("Cart is empty!");
+
+        const isDelivery = confirm("📦 Order Preference:\n\nClick OK for Delivery (+RM 5.00)\nClick Cancel for Pickup (Free)");
+        const deliveryFee = isDelivery ? 5.0 : 0.0;
+        
+        // TARGET THE RECEIPT LIST
+        const receiptItems = document.getElementById('receiptItems');
+        if (receiptItems) {
+            receiptItems.innerHTML = ''; // Clear old data
+            
+            // THIS IS THE FIX: Loop and add each item name and price
+            cart.forEach(item => {
+                const row = document.createElement('div');
+                row.style = "display:flex; justify-content:space-between; margin-bottom:8px;";
+                row.innerHTML = `
+                    <span>${item.quantity}x ${item.name}</span>
+                    <span>RM ${(item.price * item.quantity).toFixed(2)}</span>
+                `;
+                receiptItems.appendChild(row);
+            });
+        }
+
+        // Update Totals
+        const currentTotal = parseFloat(grandTotalEl.textContent.replace('RM ', ''));
+        document.getElementById('receiptTotal').textContent = `RM ${(currentTotal + deliveryFee).toFixed(2)}`;
+        
+        // Show the receipt section
+        document.getElementById('cartContent').style.display = 'none';
+        document.getElementById('receiptSection').style.display = 'block';
+        
+        localStorage.removeItem('gg_cart');
+        updateCartBadge(); 
+    });
+}

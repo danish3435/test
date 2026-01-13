@@ -241,6 +241,7 @@ nav a.active::after {
                 url('promo/front1.png') center/cover no-repeat;
 }
 
+
 .bg-student {
     background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
                 url('promo/front2.png') center/cover no-repeat;
@@ -895,6 +896,45 @@ nav a.active::after {
 @media (max-width: 600px) {
     .form-row { grid-template-columns: 1fr; }
     .toast { left: 20px; right: 20px; bottom: 20px; }
+}
+
+/* --- CLEAN MODERN FOOTER --- */
+footer {
+    background-color: #f8f9fa; /* Very light gray */
+    padding: 60px 0 30px 0;
+    border-top: 1px solid #eaeaea; /* Subtle separation line */
+    color: var(--dark);
+    margin-top: 80px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr; /* Gives the brand description more space */
+    gap: 40px;
+}
+
+.footer-column h4 {
+    color: var(--brand-green);
+    font-weight: 800;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.footer-desc {
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 350px;
+}
+
+.footer-bottom {
+    margin-top: 40px;
+    padding-top: 25px;
+    border-top: 1px solid #eee;
+    text-align: center;
+    color: #999;
+    font-size: 0.9rem;
 }
 
 /* --- FOOTER --- */
